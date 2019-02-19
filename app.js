@@ -49,7 +49,7 @@ populateDisplay();
 
 document.getElementById('equals').addEventListener('click', () => {
     input = display.textContent.split(' ');
-    display.textContent = operate(input[0], input[2], input[1]);
+    display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
 });
 
 document.getElementById('clear').addEventListener('click', () => {
@@ -58,19 +58,23 @@ document.getElementById('clear').addEventListener('click', () => {
 
 const operation = {
     add: function(a, b) {
-        return Number(a) + Number(b);
+        return a + b;
     },
 
     subtract: function(a, b) {
-        return Number(a) - Number(b);
+        return a - b;
     },
 
     multiply: function(a, b) {
-        return Number(a) * Number(b);
+        return a * b;
     },
 
     divide: function(a, b) {
-        return Number(a) / Number(b);
+        if (b === 0) {
+            return 'C\'mon, you know better.';
+        } else {
+            return a / b;
+        }
     },
 }
 
@@ -85,6 +89,6 @@ function operate(a, b, operator) {
         case '/':
             return operation.divide(a, b);
         default:
-            return 'foobar';
+            return 'Error';
     }
 }
