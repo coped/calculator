@@ -48,27 +48,29 @@ function populateDisplay() {
 populateDisplay();
 
 document.getElementById('equals').addEventListener('click', () => {
-    result = document.createElement('h1');
-    result.textContent = display.textContent;
-    container.appendChild(result);
+    input = display.textContent.split(' ');
+    display.textContent = operate(input[0], input[2], input[1]);
 });
 
+document.getElementById('clear').addEventListener('click', () => {
+    display.textContent = '';
+});
 
 const operation = {
     add: function(a, b) {
-        return a + b;
+        return Number(a) + Number(b);
     },
 
     subtract: function(a, b) {
-        return a - b;
+        return Number(a) - Number(b);
     },
 
     multiply: function(a, b) {
-        return a * b;
+        return Number(a) * Number(b);
     },
 
     divide: function(a, b) {
-        return a / b;
+        return Number(a) / Number(b);
     },
 }
 
