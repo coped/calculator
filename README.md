@@ -6,5 +6,5 @@ This is a small project created to test the author's fundamental JavaScript, HTM
 # Github Repository
 https://github.com/coped/calculator
 
-#Author 
+# Author 
 Dennis Cope, https://github.com/coped

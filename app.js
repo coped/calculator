@@ -30,6 +30,9 @@ function populateDisplay() {
     document.getElementById('9').addEventListener('click', () => {
         display.textContent += '9';
     });
+    document.getElementById('.').addEventListener('click', () => {
+        display.textContent += '.';
+    });
     // For operators
     document.getElementById('+').addEventListener('click', () => {
         display.textContent += ' + ';
