@@ -1,3 +1,59 @@
+function populateDisplay() {
+    // For operands
+    document.getElementById('0').addEventListener('click', () => {
+        display.textContent += '0';
+    });
+    document.getElementById('1').addEventListener('click', () => {
+        display.textContent += '1';
+    });
+    document.getElementById('2').addEventListener('click', () => {
+        display.textContent += '2';
+    });
+    document.getElementById('3').addEventListener('click', () => {
+        display.textContent += '3';
+    });
+    document.getElementById('4').addEventListener('click', () => {
+        display.textContent += '4';
+    });
+    document.getElementById('5').addEventListener('click', () => {
+        display.textContent += '5';
+    });
+    document.getElementById('6').addEventListener('click', () => {
+        display.textContent += '6';
+    });
+    document.getElementById('7').addEventListener('click', () => {
+        display.textContent += '7';
+    });
+    document.getElementById('8').addEventListener('click', () => {
+        display.textContent += '8';
+    });
+    document.getElementById('9').addEventListener('click', () => {
+        display.textContent += '9';
+    });
+    // For operators
+    document.getElementById('+').addEventListener('click', () => {
+        display.textContent += ' + ';
+    });
+    document.getElementById('-').addEventListener('click', () => {
+        display.textContent += ' - ';
+    });
+    document.getElementById('*').addEventListener('click', () => {
+        display.textContent += ' * ';
+    });
+    document.getElementById('/').addEventListener('click', () => {
+        display.textContent += ' / ';
+    });
+}
+
+populateDisplay();
+
+document.getElementById('equals').addEventListener('click', () => {
+    result = document.createElement('h1');
+    result.textContent = display.textContent;
+    container.appendChild(result);
+});
+
+
 const operation = {
     add: function(a, b) {
         return a + b;
