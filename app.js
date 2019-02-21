@@ -50,6 +50,16 @@ function populateDisplay() {
 
 populateDisplay();
 
+button = Array.from(document.getElementsByClassName('button'));
+button.forEach(button => button.addEventListener('click', () => {
+    if (display.textContent === /[a-zA-Z]/g){
+        display.textContent = '';
+        console.log('true');
+    } else {
+        console.log('false');
+    }
+}));
+
 document.getElementById('equals').addEventListener('click', () => {
     input = display.textContent.split(' ');
     display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
@@ -92,6 +102,6 @@ function operate(a, b, operator) {
         case '/':
             return operation.divide(a, b);
         default:
-            return 'Error';
+            return 'Syntax Error';
     }
 }
