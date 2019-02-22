@@ -54,11 +54,14 @@ document.getElementById('equals').addEventListener('click', () => {
 document.getElementById('clear').addEventListener('click', () => {
     display.textContent = '';
 });
-// Auto evaluate at |operand operator operand| case
-let operatorButtons = Array.from(document.querySelectorAll('.operator'));
+// Auto evaluate at "operand operator operand" case
+let operatorButtons = Array.from(document.getElementsByClassName('operators'));
 operatorButtons.forEach(button => button.addEventListener('click', () => {
-    let input = display.textContent.split('');
+    let input = display.textContent.split(' ');
     console.log(input);
+    if (input[1] === true && input[2] === true) {
+        display.textContent = operate(input[0], input[2], input[1]);
+    }
 }))
 // Delete button logic
 document.getElementById('delete').addEventListener('click', () => {
