@@ -45,6 +45,13 @@ document.getElementById('*').addEventListener('click', () => {
 document.getElementById('/').addEventListener('click', () => {
     display.textContent += ' / ';
 });
+
+let buttons = [
+    {element: document.getElementById('0').addEventListener, value: '0'},
+    {element: document.getElementById('1').addEventListener, value: '1'},
+]
+
+console.log(buttons);
 // Equals button logic
 document.getElementById('equals').addEventListener('click', () => {
     input = display.textContent.split(' ');
@@ -57,10 +64,10 @@ document.getElementById('clear').addEventListener('click', () => {
 // Auto evaluate at "operand operator operand" case
 let operatorButtons = Array.from(document.getElementsByClassName('operators'));
 operatorButtons.forEach(button => button.addEventListener('click', () => {
-    let input = display.textContent.split(' ');
+    let input = display.textContent.split(/[\d]/);
     console.log(input);
     if (input[1] === true && input[2] === true) {
-        display.textContent = operate(input[0], input[2], input[1]);
+        display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
     }
 }))
 // Delete button logic
