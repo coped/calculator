@@ -16,7 +16,7 @@ html {
 }
 
 #calculator {
-    height: 850px;
+    height: 800px;
     width: 910px;
     margin: 20px auto;
     border: 3px solid grey;
@@ -38,7 +38,7 @@ html {
 
 #button-container {
     display: grid;
-    grid-gap: 2px;
+    grid-gap: 15px;
     width: 830px;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);

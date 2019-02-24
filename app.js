@@ -27,9 +27,10 @@ const operators = [
 ]
 operators.forEach(operator => operator.element.addEventListener('click', () => {
     input = display.textContent.split(' ');
-    console.log(input);
     if (input[1] === '+' || input[1] === '−' || input[1] === '*' || input[1] === '/') {
-        display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
+        if (input[2] !== '') {
+            display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
+        }
     }
     display.textContent += operator.value;
 }));
@@ -37,13 +38,13 @@ operators.forEach(operator => operator.element.addEventListener('click', () => {
 // Equals button logic
 document.getElementById('equals').addEventListener('click', () => {
     input = display.textContent.split(' ');
-    display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
+    display.textContent = Math.floor((operate(Number(input[0]), Number(input[2]), input[1])) * 10000) / 10000;
+
 });
 // Clear button logic
 document.getElementById('clear').addEventListener('click', () => {
     display.textContent = '';
 });
-// Auto evaluate at "number operator number" case
 // Delete button logic
 document.getElementById('delete').addEventListener('click', () => {
     let input = display.textContent.split('');
