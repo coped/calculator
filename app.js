@@ -10,22 +10,27 @@ const numbers = [
     {element: document.getElementById('7'), value: '7'},
     {element: document.getElementById('8'), value: '8'},
     {element: document.getElementById('9'), value: '9'},
+    {element: document.getElementById('.'), value: '.'},
+    {element: document.getElementById('negative'), value: '-'},
 ]
 numbers.forEach(number => number.element.addEventListener('click', () => {
     display.textContent += number.value;
 }));
 
-// For operators and other buttons
+// For operators
 const operators = [
-    {element: document.getElementById('.'), value: '.'},
     {element: document.getElementById('add'), value: ' + '},
     {element: document.getElementById('subtract'), value: ' − '},
     {element: document.getElementById('multiply'), value: ' * '},
     {element: document.getElementById('divide'), value: ' / '},
-    {element: document.getElementById('negative'), value: '-'},
 
 ]
 operators.forEach(operator => operator.element.addEventListener('click', () => {
+    input = display.textContent.split(' ');
+    console.log(input);
+    if (input[1] === '+' || input[1] === '−' || input[1] === '*' || input[1] === '/') {
+        display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
+    }
     display.textContent += operator.value;
 }));
 
@@ -39,14 +44,6 @@ document.getElementById('clear').addEventListener('click', () => {
     display.textContent = '';
 });
 // Auto evaluate at "number operator number" case
-let operatorButtons = Array.from(document.getElementsByClassName('operators'));
-operatorButtons.forEach(button => button.addEventListener('click', () => {
-    let input = display.textContent.split(/[\d]/);
-    console.log(input);
-    if (input[1] === true && input[2] === true) {
-        display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
-    }
-}))
 // Delete button logic
 document.getElementById('delete').addEventListener('click', () => {
     let input = display.textContent.split('');
@@ -74,7 +71,7 @@ const operation = {
     },
 
     divide: function (a, b) {
-        if (b === 0) {
+        if (b === '0') {
             alert('C\'mon, you know better.');
             return;
         } else {
