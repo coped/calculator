@@ -1,57 +1,34 @@
-// For operands
-document.getElementById('0').addEventListener('click', () => {
-    display.textContent += '0';
-});
-document.getElementById('1').addEventListener('click', () => {
-    display.textContent += '1';
-});
-document.getElementById('2').addEventListener('click', () => {
-    display.textContent += '2';
-});
-document.getElementById('3').addEventListener('click', () => {
-    display.textContent += '3';
-});
-document.getElementById('4').addEventListener('click', () => {
-    display.textContent += '4';
-});
-document.getElementById('5').addEventListener('click', () => {
-    display.textContent += '5';
-});
-document.getElementById('6').addEventListener('click', () => {
-    display.textContent += '6';
-});
-document.getElementById('7').addEventListener('click', () => {
-    display.textContent += '7';
-});
-document.getElementById('8').addEventListener('click', () => {
-    display.textContent += '8';
-});
-document.getElementById('9').addEventListener('click', () => {
-    display.textContent += '9';
-});
-document.getElementById('.').addEventListener('click', () => {
-    display.textContent += '.';
-});
-// For operators
-document.getElementById('+').addEventListener('click', () => {
-    display.textContent += ' + ';
-});
-document.getElementById('-').addEventListener('click', () => {
-    display.textContent += ' - ';
-});
-document.getElementById('*').addEventListener('click', () => {
-    display.textContent += ' * ';
-});
-document.getElementById('/').addEventListener('click', () => {
-    display.textContent += ' / ';
-});
-
-let buttons = [
-    {element: document.getElementById('0').addEventListener, value: '0'},
-    {element: document.getElementById('1').addEventListener, value: '1'},
+// For number buttons
+const numbers = [
+    {element: document.getElementById('0'), value: '0'},
+    {element: document.getElementById('1'), value: '1'},
+    {element: document.getElementById('2'), value: '2'},
+    {element: document.getElementById('3'), value: '3'},
+    {element: document.getElementById('4'), value: '4'},
+    {element: document.getElementById('5'), value: '5'},
+    {element: document.getElementById('6'), value: '6'},
+    {element: document.getElementById('7'), value: '7'},
+    {element: document.getElementById('8'), value: '8'},
+    {element: document.getElementById('9'), value: '9'},
 ]
+numbers.forEach(number => number.element.addEventListener('click', () => {
+    display.textContent += number.value;
+}));
 
-console.log(buttons);
+// For operators and other buttons
+const operators = [
+    {element: document.getElementById('.'), value: '.'},
+    {element: document.getElementById('add'), value: ' + '},
+    {element: document.getElementById('subtract'), value: ' − '},
+    {element: document.getElementById('multiply'), value: ' * '},
+    {element: document.getElementById('divide'), value: ' / '},
+    {element: document.getElementById('negative'), value: '-'},
+
+]
+operators.forEach(operator => operator.element.addEventListener('click', () => {
+    display.textContent += operator.value;
+}));
+
 // Equals button logic
 document.getElementById('equals').addEventListener('click', () => {
     input = display.textContent.split(' ');
@@ -61,7 +38,7 @@ document.getElementById('equals').addEventListener('click', () => {
 document.getElementById('clear').addEventListener('click', () => {
     display.textContent = '';
 });
-// Auto evaluate at "operand operator operand" case
+// Auto evaluate at "number operator number" case
 let operatorButtons = Array.from(document.getElementsByClassName('operators'));
 operatorButtons.forEach(button => button.addEventListener('click', () => {
     let input = display.textContent.split(/[\d]/);
@@ -78,25 +55,25 @@ document.getElementById('delete').addEventListener('click', () => {
     } else if (input[input.length - 1 === ' ']) {
         input.splice(input.length - 2, 2);
     } else {
-        input.splice(input.length - 1 ,1);
+        input.splice(input.length - 1, 1);
     }
     display.textContent = input.join('');
 });
 // Logic for operations
 const operation = {
-    add: function(a, b) {
+    add: function (a, b) {
         return a + b;
     },
 
-    subtract: function(a, b) {
+    subtract: function (a, b) {
         return a - b;
     },
 
-    multiply: function(a, b) {
+    multiply: function (a, b) {
         return a * b;
     },
 
-    divide: function(a, b) {
+    divide: function (a, b) {
         if (b === 0) {
             alert('C\'mon, you know better.');
             return;
@@ -110,7 +87,7 @@ function operate(a, b, operator) {
     switch (operator) {
         case '+':
             return operation.add(a, b);
-        case '-':
+        case '−':
             return operation.subtract(a, b);
         case '*':
             return operation.multiply(a, b);

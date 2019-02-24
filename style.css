@@ -7,8 +7,6 @@
 
 html {
     background-color: white;
-    display: grid;
-    align-items: center;
     font-family: 'Times New Roman', Times, serif
 }
 
@@ -28,7 +26,7 @@ html {
 
 #display {
     padding: 25px;
-    margin: 30px;
+    margin: 30px auto;
     width: 840px;
     height: 140px;
     background-color: white;
@@ -40,48 +38,39 @@ html {
 
 #button-container {
     display: grid;
+    grid-gap: 2px;
     width: 830px;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
-    margin: 20px;
+    margin: auto;
 }
 
 .button {
+    width: 195px;
+    height: 100px;
     border: 1px solid black;
     border-radius: 2px;
     color: black;
     background-color: white;
     font-size: 3.4em;
     padding: 20px 75px;
-    margin: 10px;
 }
 
-[id = '+'], [id = '-'], [id = '*'], [id = '/'], #clear, #delete {
-    border: 1px solid black;
-    border-radius: 2px;
-    color: black;
+#add, #subtract, #multiply, #divide, #clear, #delete {
     background-color: rgba(204, 204, 204, 0.521);
-    font-size: 3.4em;
-    padding: 20px 75px;
-    margin: 10px;
 }
 
 #negative {
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 #delete {
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 #equals {
-    border: 1px solid black;
-    border-radius: 2px;
     color: white;
     background-color: black;
-    font-size: 3.4em;
-    padding: 20px 75px;
-    margin: 10px;
 }
 
 #footer {
