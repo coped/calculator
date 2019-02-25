@@ -1,51 +1,46 @@
 // For number buttons
 const numbers = [
-    {element: document.getElementById('0'), value: '0'},
-    {element: document.getElementById('1'), value: '1'},
-    {element: document.getElementById('2'), value: '2'},
-    {element: document.getElementById('3'), value: '3'},
-    {element: document.getElementById('4'), value: '4'},
-    {element: document.getElementById('5'), value: '5'},
-    {element: document.getElementById('6'), value: '6'},
-    {element: document.getElementById('7'), value: '7'},
-    {element: document.getElementById('8'), value: '8'},
-    {element: document.getElementById('9'), value: '9'},
-    {element: document.getElementById('.'), value: '.'},
-    {element: document.getElementById('negative'), value: '-'},
+    {button: document.getElementById('0'), value: '0'},
+    {button: document.getElementById('1'), value: '1'},
+    {button: document.getElementById('2'), value: '2'},
+    {button: document.getElementById('3'), value: '3'},
+    {button: document.getElementById('4'), value: '4'},
+    {button: document.getElementById('5'), value: '5'},
+    {button: document.getElementById('6'), value: '6'},
+    {button: document.getElementById('7'), value: '7'},
+    {button: document.getElementById('8'), value: '8'},
+    {button: document.getElementById('9'), value: '9'},
+    {button: document.getElementById('.'), value: '.'},
+    {button: document.getElementById('negative'), value: '-'},
 ]
-numbers.forEach(number => number.element.addEventListener('click', () => {
+numbers.forEach(number => number.button.addEventListener('click', () => {
     display.textContent += number.value;
 }));
 
 // For operators
 const operators = [
-    {element: document.getElementById('add'), value: ' + '},
-    {element: document.getElementById('subtract'), value: ' − '},
-    {element: document.getElementById('multiply'), value: ' * '},
-    {element: document.getElementById('divide'), value: ' / '},
-
+    {button: document.getElementById('add'), value: ' + '},
+    {button: document.getElementById('subtract'), value: ' − '},
+    {button: document.getElementById('multiply'), value: ' * '},
+    {button: document.getElementById('divide'), value: ' / '},
 ]
-operators.forEach(operator => operator.element.addEventListener('click', () => {
-    input = display.textContent.split(' ');
-    if (input[1] === '+' || input[1] === '−' || input[1] === '*' || input[1] === '/') {
-        if (input[2] !== '') {
-            display.textContent = operate(Number(input[0]), Number(input[2]), input[1]);
-        }
-    }
-    display.textContent += operator.value;
+operators.forEach(operator => operator.button.addEventListener('click', () => {
+    input = display.textContent.trim().split(' ');
+    console.log(input);
+    // Auto evaluate at input of second operator
 }));
 
-// Equals button logic
+// Equals button
 document.getElementById('equals').addEventListener('click', () => {
     input = display.textContent.split(' ');
+    // Rounds to four decimal places
     display.textContent = Math.floor((operate(Number(input[0]), Number(input[2]), input[1])) * 10000) / 10000;
-
 });
-// Clear button logic
+// Clear button
 document.getElementById('clear').addEventListener('click', () => {
     display.textContent = '';
 });
-// Delete button logic
+// Delete button
 document.getElementById('delete').addEventListener('click', () => {
     let input = display.textContent.split('');
     if (input[input.length - 2] === '+' || input[input.length - 2] === '-' || input[input.length - 2] === '*' || input[input.length - 2] === '/') {
@@ -58,7 +53,7 @@ document.getElementById('delete').addEventListener('click', () => {
     display.textContent = input.join('');
 });
 // Logic for operations
-const operation = {
+const operations = {
     add: function (a, b) {
         return a + b;
     },
@@ -84,13 +79,13 @@ const operation = {
 function operate(a, b, operator) {
     switch (operator) {
         case '+':
-            return operation.add(a, b);
+            return operations.add(a, b);
         case '−':
-            return operation.subtract(a, b);
+            return operations.subtract(a, b);
         case '*':
-            return operation.multiply(a, b);
+            return operations.multiply(a, b);
         case '/':
-            return operation.divide(a, b);
+            return operations.divide(a, b);
         default:
             return 'Syntax Error';
     }
