@@ -1,64 +1,64 @@
-// For number buttons
+// For number and operator buttons
 const numbers = [
-    {button: document.getElementById("0"), value: "0"},
-    {button: document.getElementById("1"), value: "1"},
-    {button: document.getElementById("2"), value: "2"},
-    {button: document.getElementById("3"), value: "3"},
-    {button: document.getElementById("4"), value: "4"},
-    {button: document.getElementById("5"), value: "5"},
-    {button: document.getElementById("6"), value: "6"},
-    {button: document.getElementById("7"), value: "7"},
-    {button: document.getElementById("8"), value: "8"},
-    {button: document.getElementById("9"), value: "9"},
-    {button: document.getElementById("."), value: "."},
-    {button: document.getElementById("negative"), value: "-"},
+    { button: document.getElementById("0"), value: "0" },
+    { button: document.getElementById("1"), value: "1" },
+    { button: document.getElementById("2"), value: "2" },
+    { button: document.getElementById("3"), value: "3" },
+    { button: document.getElementById("4"), value: "4" },
+    { button: document.getElementById("5"), value: "5" },
+    { button: document.getElementById("6"), value: "6" },
+    { button: document.getElementById("7"), value: "7" },
+    { button: document.getElementById("8"), value: "8" },
+    { button: document.getElementById("9"), value: "9" },
+    { button: document.getElementById("."), value: "." },
+    { button: document.getElementById("negative"), value: "-" },
 ]
 numbers.forEach(number => number.button.addEventListener("click", () => {
     display.textContent += number.value;
 }));
 
-// For operators
 const operators = [
-    {button: document.getElementById("add"), value: " + "},
-    {button: document.getElementById("subtract"), value: " − "},
-    {button: document.getElementById("multiply"), value: " * "},
-    {button: document.getElementById("divide"), value: " / "},
+    { button: document.getElementById("add"), value: " + " },
+    { button: document.getElementById("subtract"), value: " − " },
+    { button: document.getElementById("multiply"), value: " * " },
+    { button: document.getElementById("divide"), value: " / " },
 ]
 operators.forEach(operator => operator.button.addEventListener("click", () => {
+    // Auto evaluate first two numbers at input of second operator
     input = display.textContent.trim().split(" ");
-    console.log(input);
-    // Auto evaluate at input of second operator
-    if (input[1] == "+" || input[1] == "−" || input[1] == "*" || input[1] == "/") {
-        if (input[2] != true) {
+    if (input[1] === "+" || input[1] === "−" || input[1] === "*" || input[1] === "/") {
+        if (input[2] !== true) {
             display.textContent = (operate(Number(input[0]), input[1], Number(input[2])));
         }
     }
     display.textContent += operator.value;
-
 }));
 
-// Equals button
+// For equals, clear, and delete buttons
 document.getElementById("equals").addEventListener("click", () => {
     input = display.textContent.split(" ");
-    // Rounds to four decimal places
     display.textContent = Math.floor((operate(Number(input[0]), input[1], Number(input[2]))) * 10000) / 10000;
 });
-// Clear button
+
 document.getElementById("clear").addEventListener("click", () => {
     display.textContent = "";
 });
-// Delete button
+
 document.getElementById("delete").addEventListener("click", () => {
-    let input = display.textContent.split("");
-    if (input[input.length - 2] === "+" || input[input.length - 2] === "-" || input[input.length - 2] === "*" || input[input.length - 2] === "/") {
-        input.splice(input.length - 3, 3);
-    } else if (input[input.length - 1 === " "]) {
-        input.splice(input.length - 2, 2);
+    let input = display.textContent.trim().split(" ");
+    last = input.length - 1;
+    let displayContent = display.textContent.split("");
+
+    if (input[last] === "+" || input[last] === "−" || input[last] === "*" || input[last] === "/") {
+        // Because operators are surrounded by spaces
+        displayContent.splice(displayContent.length - 3, 3);
     } else {
-        input.splice(input.length - 1, 1);
+        displayContent.splice(displayContent.length - 1, 1);
     }
-    display.textContent = input.join("");
+
+    display.textContent = displayContent.join("");
 });
+
 // Logic for operations
 const operations = {
     add: function (a, b) {
