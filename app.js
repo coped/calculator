@@ -1,29 +1,11 @@
-// For number and operator buttons
-const numbers = [
-    { button: document.getElementById("0"), value: "0" },
-    { button: document.getElementById("1"), value: "1" },
-    { button: document.getElementById("2"), value: "2" },
-    { button: document.getElementById("3"), value: "3" },
-    { button: document.getElementById("4"), value: "4" },
-    { button: document.getElementById("5"), value: "5" },
-    { button: document.getElementById("6"), value: "6" },
-    { button: document.getElementById("7"), value: "7" },
-    { button: document.getElementById("8"), value: "8" },
-    { button: document.getElementById("9"), value: "9" },
-    { button: document.getElementById("."), value: "." },
-    { button: document.getElementById("negative"), value: "-" },
-]
-numbers.forEach(number => number.button.addEventListener("click", () => {
-    display.textContent += number.value;
+// Applying functionality to number and operator buttons
+const numbers = Array.from(document.querySelectorAll('.numbers'))
+numbers.forEach(number => number.addEventListener("click", () => {
+    display.textContent += event.target.innerText;
 }));
 
-const operators = [
-    { button: document.getElementById("add"), value: " + " },
-    { button: document.getElementById("subtract"), value: " − " },
-    { button: document.getElementById("multiply"), value: " * " },
-    { button: document.getElementById("divide"), value: " / " },
-]
-operators.forEach(operator => operator.button.addEventListener("click", () => {
+const operators = Array.from(document.querySelectorAll('.operators'))
+operators.forEach(operator => operator.addEventListener("click", () => {
     // Auto evaluate first two numbers at input of second operator
     input = display.textContent.trim().split(" ");
     if (input[1] === "+" || input[1] === "−" || input[1] === "*" || input[1] === "/") {
@@ -31,10 +13,10 @@ operators.forEach(operator => operator.button.addEventListener("click", () => {
             display.textContent = (operate(Number(input[0]), input[1], Number(input[2])));
         }
     }
-    display.textContent += operator.value;
+    display.textContent += ` ${event.target.innerText} `;
 }));
 
-// For equals, clear, and delete buttons
+// Applying functionality to equals, clear, and delete buttons
 document.getElementById("equals").addEventListener("click", () => {
     input = display.textContent.split(" ");
     display.textContent = Math.floor((operate(Number(input[0]), input[1], Number(input[2]))) * 10000) / 10000;
