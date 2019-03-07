@@ -1,10 +1,14 @@
 // Applying functionality to number and operator buttons
-const numbers = Array.from(document.querySelectorAll('.numbers'))
+const numbers = document.querySelectorAll('.numbers');
 numbers.forEach(number => number.addEventListener("click", () => {
     display.textContent += event.target.innerText;
 }));
 
-const operators = Array.from(document.querySelectorAll('.operators'))
+document.getElementById('negative').addEventListener('click', () => {
+    display.textContent += "-";
+})
+
+const operators = document.querySelectorAll('.operators')
 operators.forEach(operator => operator.addEventListener("click", () => {
     // Auto evaluate first two numbers at input of second operator
     input = display.textContent.trim().split(" ");
@@ -37,7 +41,7 @@ document.getElementById("delete").addEventListener("click", () => {
     } else {
         displayContent.splice(displayContent.length - 1, 1);
     }
-
+    
     display.textContent = displayContent.join("");
 });
 

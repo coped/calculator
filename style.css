@@ -3,12 +3,12 @@
     padding: 0;
     box-sizing: border-box;
     text-align: center;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: lighter;
 }
 
 html {
     background-color: white;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 #header {
