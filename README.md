@@ -1,10 +1,10 @@
 # Calculator
-This is a JavaScript based arithmetic calculator. To use, visit https://coped.github.io/calculator/.
+### About
+This is a basic arithmetic calculator made with JavaScript.
 
-This is a small project created to test the author's fundamental JavaScript, HTML, and CSS skills.
+ To see it in action, visit https://coped.github.io/calculator/.
 
-# Github Repository
-https://github.com/coped/calculator
+This is a small project created to test the author's fundamental JavaScript, HTML, and CSS skills. Part of *The Odin Project* curriculum.
 
 # Author 
-Dennis Cope, https://github.com/coped
+Dennis Cope, [GITHUB](https://github.com/coped).
