@@ -1,72 +1,69 @@
-// Applying functionality to number and operator buttons
-const numbers = document.querySelectorAll('.numbers');
-numbers.forEach(number => number.addEventListener("click", () => {
-    display.textContent += event.target.innerText;
-}));
-
-document.getElementById('negative').addEventListener('click', () => {
-    display.textContent += "-";
-})
-
-const operators = document.querySelectorAll('.operators')
-operators.forEach(operator => operator.addEventListener("click", () => {
-    // Auto evaluate first two numbers at input of second operator
+// To give buttons their function
+const buttons = document.querySelectorAll('.button');
+buttons.forEach(button => button.addEventListener("click", () => {
+    operatorList = ["+", "−", "*", "/"];
     input = display.textContent.trim().split(" ");
-    if (input[1] === "+" || input[1] === "−" || input[1] === "*" || input[1] === "/") {
-        if (input[2] !== true) {
-            display.textContent = (operate(Number(input[0]), input[1], Number(input[2])));
-        }
+
+    switch (button.classList[1]) {
+        case "numbers":
+            return display.textContent += event.target.innerText;
+        case "operators":
+            // Auto evaluate first two numbers at input of second operator
+            if (operatorList.includes(input[1]) && input[2]) {
+                 display.textContent = Math.floor((operate(Number(input[0]), input[1], Number(input[2]))) * 10000) / 10000;
+            }
+            if (operatorList.includes(input[1]) && !input[2]) {
+                display.textContent = `${input[0]} ${event.target.innerText} `;
+            } else {
+            display.textContent += ` ${event.target.innerText} `;
+            }
+            break;
     }
-    display.textContent += ` ${event.target.innerText} `;
+
+    switch (button.id) {
+        case "negative":
+            return display.textContent += "-";
+        case "equals":
+            if (!input[2]) {
+                display.textContent;
+            } else {
+                display.textContent = Math.floor((operate(Number(input[0]), input[1], Number(input[2]))) * 10000) / 10000;
+            }
+            break;
+        case "clear":
+            return display.textContent = "";
+        case "delete":
+            untrimmedInput = display.textContent.split("");
+            // Because operators are surrounded by spaces
+            if (operatorList.includes(input[input.length - 1])) {
+                untrimmedInput.splice(untrimmedInput.length - 3, 3);
+            } else {
+                untrimmedInput.splice(untrimmedInput.length - 1, 1);
+            }
+        
+            display.textContent = untrimmedInput.join("");
+            break;
+    }
 }));
-
-// Applying functionality to equals, clear, and delete buttons
-document.getElementById("equals").addEventListener("click", () => {
-    input = display.textContent.split(" ");
-    display.textContent = Math.floor((operate(Number(input[0]), input[1], Number(input[2]))) * 10000) / 10000;
-});
-
-document.getElementById("clear").addEventListener("click", () => {
-    display.textContent = "";
-});
-
-document.getElementById("delete").addEventListener("click", () => {
-    let input = display.textContent.trim().split(" ");
-    last = input.length - 1;
-    let displayContent = display.textContent.split("");
-
-    if (input[last] === "+" || input[last] === "−" || input[last] === "*" || input[last] === "/") {
-        // Because operators are surrounded by spaces
-        displayContent.splice(displayContent.length - 3, 3);
-    } else {
-        displayContent.splice(displayContent.length - 1, 1);
-    }
-    
-    display.textContent = displayContent.join("");
-});
 
 // Logic for operations
 const operations = {
     add: function (a, b) {
         return a + b;
     },
-
     subtract: function (a, b) {
         return a - b;
     },
-
     multiply: function (a, b) {
         return a * b;
     },
-
     divide: function (a, b) {
-        if (b === "0") {
-            alert("C'mon, you know better.");
-            return;
+        if (b == "0") {
+            return "C'mon, you know better.";
         } else {
             return a / b;
         }
-    },
+    }
 }
 
 function operate(a, operator, b) {
@@ -79,7 +76,5 @@ function operate(a, operator, b) {
             return operations.multiply(a, b);
         case "/":
             return operations.divide(a, b);
-        default:
-            return "Syntax Error";
     }
 }
